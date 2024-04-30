@@ -20,12 +20,14 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    public const REDIRECTO='dashboard';
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = self::REDIRECTO;
 
     /**
      * Create a new controller instance.
