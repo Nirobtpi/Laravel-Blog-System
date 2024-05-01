@@ -83,8 +83,31 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="sidenav-item-link" href="email-inbox.html">
+                                        <a class="sidenav-item-link" href="{{ url('/view-category') }}">
                                             <span class="nav-text">View Category</span>
+
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
+                                data-target="#tag" aria-expanded="false" aria-controls="email">
+                                <i class="mdi mdi-email"></i>
+                                <span class="nav-text">Tag</span> <b class="caret"></b>
+                            </a>
+                            <ul class="collapse" id="tag" data-parent="#sidebar-menu">
+                                <div class="sub-menu">
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{ url('/add-tag') }}">
+                                            <span class="nav-text">Add Tags</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{ url('/view-tag') }}">
+                                            <span class="nav-text">View Tag</span>
 
                                         </a>
                                     </li>
@@ -164,7 +187,7 @@
                                 <button class="dropdown-toggle nav-link" data-toggle="dropdown">
                                     <img src="{{ asset('assets/auth/images/user/user-xs-01.jpg') }}"
                                         class="user-image rounded-circle" alt="User Image" />
-                                    <span class="d-none d-lg-inline-block">John Doe</span>
+                                    <span class="d-none d-lg-inline-block">{{ Auth::user()->name }}</span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>
