@@ -114,6 +114,29 @@
                                 </div>
                             </ul>
                         </li>
+                        <li class="has-sub">
+                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
+                                data-target="#post" aria-expanded="false" aria-controls="email">
+                                <i class="mdi mdi-email"></i>
+                                <span class="nav-text">Post</span> <b class="caret"></b>
+                            </a>
+                            <ul class="collapse" id="post" data-parent="#sidebar-menu">
+                                <div class="sub-menu">
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{ url('/add-post') }}">
+                                            <span class="nav-text">Add Post</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{ url('/view-post') }}">
+                                            <span class="nav-text">View Post</span>
+
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
 

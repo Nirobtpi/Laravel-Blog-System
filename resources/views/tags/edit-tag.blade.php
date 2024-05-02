@@ -11,15 +11,15 @@
                                  {{ session('success') }}
                             </div>
                         @endif
-                        <form action="{{ url('/edit-category') }}/{{ $getCategory->id }}" method="post">
+                        <form action="{{ url('/edit-tag') }}/{{ $tag->id }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="category">Category Name</label>
-                                <input type="text" name="category" value="{{ $getCategory->name }}" class="form-control rounded-0 bg-light @error('category') is in-valid
+                                <label for="tag">Tag Name</label>
+                                <input type="text" name="name" value="{{ $tag->name }}" class="form-control rounded-0 bg-light @error('name') is in-valid
                                     
                                 @enderror"
-                                    id="category" placeholder="Enter Category Name">
-                                @error('category')
+                                    id="tag" placeholder="Enter Tag Name">
+                                @error('name')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>

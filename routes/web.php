@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\DashBoardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use Illuminate\View\Compilers\ComponentTagCompiler;
 
@@ -47,3 +48,8 @@ Route::get('delete-category/{id}',[CategoryController::class,'category_delete'])
 Route::get('/add-tag',[TagController::class,'index']);
 Route::post('/add-tag',[TagController::class,'insert_tag']);
 Route::get('/view-tag',[TagController::class,'view_tag']);
+Route::get('/edit-tag/{id}',[TagController::class,'tag_edit']);
+Route::post('/edit-tag/{id}',[TagController::class,'edit_tag']);
+
+// Post route 
+Route::get('add-post',[PostController::class,'add_post']);
