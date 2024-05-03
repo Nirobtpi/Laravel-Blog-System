@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard | @yield('title')</title>
 
     <!-- theme meta -->
     <meta name="theme-name" content="mono" />
@@ -42,6 +42,7 @@
     <!-- FAVICON -->
     <link href="{{ asset('assets/auth/images/favicon.png') }}" rel="shortcut icon" />
     <script src="{{ asset('assets/auth/plugins/nprogress/nprogress.js') }}"></script>
+
 </head>
 
 
@@ -55,7 +56,7 @@
         <!-- ====================================
           ——— LEFT SIDEBAR WITH OUT FOOTER
         ===================================== -->
-        <aside  class="left-sidebar sidebar-dark" id="left-sidebar">
+        <aside class="left-sidebar sidebar-dark" id="left-sidebar">
             <div id="sidebar" class="sidebar sidebar-with-footer">
                 <!-- Aplication Brand -->
                 <div class="app-brand">
@@ -123,13 +124,13 @@
                             <ul class="collapse" id="post" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li>
-                                        <a class="sidenav-item-link" href="{{ url('/add-post') }}">
+                                        <a class="sidenav-item-link" href="{{ url('admin/add-post') }}">
                                             <span class="nav-text">Add Post</span>
 
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="sidenav-item-link" href="{{ url('/view-post') }}">
+                                        <a class="sidenav-item-link" href="{{ url('admin/view-post') }}">
                                             <span class="nav-text">View Post</span>
 
                                         </a>
@@ -144,8 +145,8 @@
                     <div class="sidebar-footer-content">
                         <ul class="d-flex">
                             <li>
-                                <a href="user-account-settings.html" data-toggle="tooltip"
-                                    title="Profile settings"><i class="mdi mdi-settings"></i></a>
+                                <a href="user-account-settings.html" data-toggle="tooltip" title="Profile settings"><i
+                                        class="mdi mdi-settings"></i></a>
                             </li>
                             <li>
                                 <a href="#" data-toggle="tooltip" title="No chat messages"><i
@@ -240,11 +241,11 @@
 
                                     <li class="dropdown-footer">
                                         {{-- <a class="dropdown-link-item" href="{{ url('/logout') }}"> <i
-                                                class="mdi mdi-logout"></i> Log Out </a> --}}
+                                            class="mdi mdi-logout"></i> Log Out </a> --}}
                                         <form method="post" id='logout-form' action="{{ route('logout') }}">
                                             @csrf
-                                            <a id="logout-button" class="dropdown-link-item"
-                                                href="javascript:void(0)"> <i class="mdi mdi-logout"></i> Log Out </a>
+                                            <a id="logout-button" class="dropdown-link-item" href="javascript:void(0)">
+                                                <i class="mdi mdi-logout"></i> Log Out </a>
                                         </form>
 
                                     </li>
@@ -258,9 +259,9 @@
             <!-- ====================================
         ——— CONTENT WRAPPER
         ===================================== -->
-           <div class="container" style="padding-top: 60px">
-             @yield('content')
-           </div>
+            <div class="container" style="padding-top: 60px">
+                @yield('content')
+            </div>
 
             <!-- Footer -->
             <footer class="footer mt-auto">
@@ -274,6 +275,7 @@
                     var d = new Date();
                     var year = d.getFullYear();
                     document.getElementById("copy-year").innerHTML = year;
+
                 </script>
             </footer>
 
@@ -304,7 +306,7 @@
     <script src="{{ asset('assets/auth/plugins/daterangepicker/moment.min.js') }}"></script>
     <script src="{{ asset('assets/auth/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script>
-        jQuery(document).ready(function() {
+        jQuery(document).ready(function () {
             jQuery('input[name="dateRange"]').daterangepicker({
                 autoUpdateInput: false,
                 singleDatePicker: true,
@@ -312,13 +314,14 @@
                     cancelLabel: 'Clear'
                 }
             });
-            jQuery('input[name="dateRange"]').on('apply.daterangepicker', function(ev, picker) {
+            jQuery('input[name="dateRange"]').on('apply.daterangepicker', function (ev, picker) {
                 jQuery(this).val(picker.startDate.format('MM/DD/YYYY'));
             });
-            jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
+            jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function (ev, picker) {
                 jQuery(this).val('');
             });
         });
+
     </script>
 
 
@@ -335,11 +338,12 @@
     <script src="{{ asset('assets/auth/js/custom.js') }}"></script>
 
     <script>
-        $(document).ready(function() {
-            $('#logout-button').click(function() {
+        $(document).ready(function () {
+            $('#logout-button').click(function () {
                 $('#logout-form').submit();
             })
         })
+
     </script>
 
 

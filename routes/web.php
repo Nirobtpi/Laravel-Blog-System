@@ -50,6 +50,8 @@ Route::post('/add-tag',[TagController::class,'insert_tag']);
 Route::get('/view-tag',[TagController::class,'view_tag']);
 Route::get('/edit-tag/{id}',[TagController::class,'tag_edit']);
 Route::post('/edit-tag/{id}',[TagController::class,'edit_tag']);
+Route::get('/delete-tag/{id}',[TagController::class,'delete_tag']);
 
 // Post route 
-Route::get('add-post',[PostController::class,'add_post']);
+Route::get('admin/add-post',[PostController::class,'add_post']);
+Route::post('admin/add-post',[PostController::class,'store']);

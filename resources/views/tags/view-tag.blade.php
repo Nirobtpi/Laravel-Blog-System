@@ -29,7 +29,7 @@
                                 <td>{{ date('Y-m-d',strtoTime($tag->created_at)) }}</td>
                                 <td>
                                     <a href="{{ url('/edit-tag') }}/{{ $tag->id }}" class="btn btn-info">Edit</a>
-                                    <a href="{{ url('delete-tag') }}/{{ $tag->id }}" class="btn btn-danger">Delete</a>
+                                    <a onclick="return confirm('Yre You Sure?')" href="{{ url('delete-tag') }}/{{ $tag->id }}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             @empty

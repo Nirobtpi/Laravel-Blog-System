@@ -44,4 +44,8 @@ class TagController extends Controller
          ]);
          return back()->with('success','Tag Updated Successfully');
     }
+    function delete_tag($id){
+        Tag::findOrFail($id)->delete();
+         return back()->with('success','Tag Deleted Successfully');
+    }
 }
