@@ -7,9 +7,23 @@
             <div class="card card-default p-3">
                 <h2>Create Post</h2>
                 <div class="card-body" data-select2-id="9">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
+                    </div>
+                    @endif
+                    @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
                     </div>
                     @endif
                     <form action="{{ url('admin/add-post') }}" method="post">
@@ -40,7 +54,7 @@
                                 <option value="1">Publish</option>
                                 <option value="0">Draft</option>
                             </select>
-                             @error('status')
+                            @error('status')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
@@ -55,33 +69,33 @@
                                 @endforeach
 
                             </select>
-                              @error('category_id')
+                            @error('category_id')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="form-group" data-select2-id="8">
-                             <label for="tag">Tags</label>
+                            <label for="tag">Tags</label>
                             <select class="form-control @error('tags') is in-valid
                                 
-                            @enderror"  name="tags[]" multiple="multiple" id="tag">
+                            @enderror" name="tags[]" multiple="multiple" id="tag">
                                 <option value="" selected disabled>Select Tag</option>
                                 @foreach ($tags as $tag)
-                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
-                              @error('tags')
+                            @error('tags')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        
-                <div class="form-footer">
-                    <button type="submit" name="submit" class="btn btn-secondary btn-pill">Create Post</button>
-                </div>
-                </form>
 
+                        <div class="form-footer">
+                            <button type="submit" name="submit" class="btn btn-secondary btn-pill">Create Post</button>
+                        </div>
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

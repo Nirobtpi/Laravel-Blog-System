@@ -130,6 +130,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a class="sidenav-item-link" href="{{ url('admin/index') }}">
+                                            <span class="nav-text">View Post</span>
+
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a class="sidenav-item-link" href="{{ url('admin/view-post') }}">
                                             <span class="nav-text">View Post</span>
 

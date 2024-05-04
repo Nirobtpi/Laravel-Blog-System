@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -34,18 +36,37 @@ class PostController extends Controller
             'category_id.required'=>"Category Is Required",
             'tags.required'=>"Tags Is Required",
         ]);
-    $post=  Post::create([
-        'user_id'=> auth()->id(),
-        'category_id'=>$request->category_id,
-        'title'=>$request->title,
-        'description'=>$request->description,
-        'status'=>$request->status,
-        
-      ]);
 
-      foreach($request->tags as $tag){
-        $post->tags()->attach($tag);
+      try{
+        DB::beginTransaction();
+            $post=  Post::create([
+                'user_id'=> auth()->id(),
+                'category_id'=>$request->category_id,
+                'title'=>$request->title,
+                'description'=>$request->description,
+                'status'=>$request->status,
+        
+            ]);
+
+                foreach($request->tags as $tag){
+                    $post->tags()->attach($tag);
+                };
+        DB::commit();
+
+        $request->session()->flash('success','Post Created Successfully');
+        return redirect('admin/index');
+       
+
+      }catch(\Exception $e){
+        DB::rollBack();
+        return back()->withErrors($e->getMessage());
       };
+
+
+    }
+    function index(){
+        $posts=Post::where('user_id', '=', Auth::user()->id)->with('category','user')->get();
+        return view('post.index',compact('posts'));
     }
 
         
