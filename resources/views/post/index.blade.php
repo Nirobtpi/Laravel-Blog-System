@@ -19,7 +19,7 @@
 
         </div>
         <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="margin-bottom: 50px">
                 <thead>
                     <tr>
                         <th scope="col">Sl No</th>
@@ -32,11 +32,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($posts as $post)
+                    @forelse ($posts as $key=>$post)
                         <tr>
-                            <td scope="row">{{ $loop->index + 1 }}</td>
+                            <td scope="row">{{ $posts->firstItem() + $key }}</td>
                             <td>{{ $post->title }}</td>
-                            <td>{{ Str::substr($post->description, 0, 30) }}</td>
+                            <td>{{ Str::limit($post->description, 30) }}</td>
                             <td>
                                 @if ($post->status == 1)
                                     {{ 'Publish' }}
@@ -48,6 +48,9 @@
                             <td>{{ $post->category->name }}</td>
                             <th class="text-center">
                                 <a href="#">
+                                    <i class="fas fa-eye text-info"></i>
+                                </a>
+                                <a href="{{ url('/admin/post-edit') }}/{{ $post->id }}">
                                     <i class="mdi mdi-open-in-new"></i>
                                 </a>
                                 <a href="#">
@@ -62,6 +65,7 @@
 
                 </tbody>
             </table>
+            {{ $posts->links() }}
         </div>
     </div>
 @endsection

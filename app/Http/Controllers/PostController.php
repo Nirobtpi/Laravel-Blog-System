@@ -65,8 +65,15 @@ class PostController extends Controller
 
     }
     function index(){
-        $posts=Post::where('user_id', '=', Auth::user()->id)->with('category','user')->get();
+        $posts=Post::where('user_id', '=', Auth::user()->id)->with('category','user')->simplePaginate(3);
         return view('post.index',compact('posts'));
+    }
+
+    function editPost($id){
+         $categories=Category::get();
+        $tags=Tag::get();
+        $post=Post::findOrFail($id);
+        return view('post.edit',compact('categories','tags','post'));
     }
 
         

@@ -56,3 +56,4 @@ Route::get('/delete-tag/{id}',[TagController::class,'delete_tag']);
 Route::get('admin/add-post',[PostController::class,'add_post']);
 Route::post('admin/add-post',[PostController::class,'store']);
 Route::get('admin/index',[PostController::class,'index']);
+Route::get('admin/post-edit/{id}',[PostController::class,'editPost']);

@@ -35,6 +35,7 @@
     <link href="{{ asset('assets/auth/plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link href="{{ asset('assets/auth/plugins/toaster/toastr.min.css') }}" rel="stylesheet" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- MONO CSS -->
     <link id="main-css-href" rel="stylesheet" href="{{ asset('assets/auth/css/style.css') }}" />
@@ -135,12 +136,6 @@
 
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="{{ url('admin/view-post') }}">
-                                            <span class="nav-text">View Post</span>
-
-                                        </a>
-                                    </li>
                                 </div>
                             </ul>
                         </li>
@@ -151,8 +146,8 @@
                     <div class="sidebar-footer-content">
                         <ul class="d-flex">
                             <li>
-                                <a href="user-account-settings.html" data-toggle="tooltip" title="Profile settings"><i
-                                        class="mdi mdi-settings"></i></a>
+                                <a href="user-account-settings.html" data-toggle="tooltip"
+                                    title="Profile settings"><i class="mdi mdi-settings"></i></a>
                             </li>
                             <li>
                                 <a href="#" data-toggle="tooltip" title="No chat messages"><i
@@ -250,7 +245,8 @@
                                             class="mdi mdi-logout"></i> Log Out </a> --}}
                                         <form method="post" id='logout-form' action="{{ route('logout') }}">
                                             @csrf
-                                            <a id="logout-button" class="dropdown-link-item" href="javascript:void(0)">
+                                            <a id="logout-button" class="dropdown-link-item"
+                                                href="javascript:void(0)">
                                                 <i class="mdi mdi-logout"></i> Log Out </a>
                                         </form>
 
@@ -281,7 +277,6 @@
                     var d = new Date();
                     var year = d.getFullYear();
                     document.getElementById("copy-year").innerHTML = year;
-
                 </script>
             </footer>
 
@@ -312,7 +307,7 @@
     <script src="{{ asset('assets/auth/plugins/daterangepicker/moment.min.js') }}"></script>
     <script src="{{ asset('assets/auth/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script>
-        jQuery(document).ready(function () {
+        jQuery(document).ready(function() {
             jQuery('input[name="dateRange"]').daterangepicker({
                 autoUpdateInput: false,
                 singleDatePicker: true,
@@ -320,14 +315,13 @@
                     cancelLabel: 'Clear'
                 }
             });
-            jQuery('input[name="dateRange"]').on('apply.daterangepicker', function (ev, picker) {
+            jQuery('input[name="dateRange"]').on('apply.daterangepicker', function(ev, picker) {
                 jQuery(this).val(picker.startDate.format('MM/DD/YYYY'));
             });
-            jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function (ev, picker) {
+            jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
                 jQuery(this).val('');
             });
         });
-
     </script>
 
 
@@ -344,12 +338,11 @@
     <script src="{{ asset('assets/auth/js/custom.js') }}"></script>
 
     <script>
-        $(document).ready(function () {
-            $('#logout-button').click(function () {
+        $(document).ready(function() {
+            $('#logout-button').click(function() {
                 $('#logout-form').submit();
             })
         })
-
     </script>
 
 
