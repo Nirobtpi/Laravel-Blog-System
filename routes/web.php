@@ -27,7 +27,7 @@ Route::get('/auth', function () {
 });
 
 Auth::routes([
-    'register'=>false,
+    // 'register'=>false,
 ]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -57,3 +57,4 @@ Route::get('admin/add-post',[PostController::class,'add_post']);
 Route::post('admin/add-post',[PostController::class,'store']);
 Route::get('admin/index',[PostController::class,'index']);
 Route::get('admin/post-edit/{id}',[PostController::class,'editPost']);
+Route::post('admin/post-update/{id}',[PostController::class,'update']);

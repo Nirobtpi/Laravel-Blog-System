@@ -53,7 +53,7 @@ class PostController extends Controller
                 };
         DB::commit();
 
-        $request->session()->flash('success','Post Created Successfully');
+        $request->session()->flash('success_alert','Post Created Successfully');
         return redirect('admin/index');
        
 
@@ -76,5 +76,36 @@ class PostController extends Controller
         return view('post.edit',compact('categories','tags','post'));
     }
 
-        
+    function update(Request $request, $id){
+
+        $request->validate([
+            'title'=>['required','string','max:255'],
+            'description'=>['required'],
+            'status'=>['required'],
+            'category_id'=>['required'],
+            'tags'=>['required','array'],
+            'tags.*'=>['required','string'],
+        ],[
+            'title.required'=>"Title Is Required",
+            'description.required'=>"Description Is Required",
+            'status.required'=>"Publish Is Required",
+            'category_id.required'=>"Category Is Required",
+            'tags.required'=>"Tags Is Required",
+        ]);
+        $post=Post::findOrFail($id);
+        $post->update([
+                'category_id'=>$request->category_id,
+                'title'=>$request->title,
+                'description'=>$request->description,
+                'status'=>$request->status,
+        ]);
+        foreach($request->tags as $tag){
+            $post->tags()->attach($tag);
+        };
+
+        $request->session()->flash('success_alert','Post Updated Successfully');
+        return redirect('admin/index');
+
+    }
+      
 }
