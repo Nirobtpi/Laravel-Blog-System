@@ -61,7 +61,7 @@
             <div id="sidebar" class="sidebar sidebar-with-footer">
                 <!-- Aplication Brand -->
                 <div class="app-brand">
-                    <a href="/index.html">
+                    <a href="{{ url('dashboard') }}">
                         <img src="{{ asset('assets/auth/images/logo.png') }}" alt="Mono">
                         <span class="brand-name">MONO</span>
                     </a>

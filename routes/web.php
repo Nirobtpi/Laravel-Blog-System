@@ -58,3 +58,4 @@ Route::post('admin/add-post',[PostController::class,'store']);
 Route::get('admin/index',[PostController::class,'index']);
 Route::get('admin/post-edit/{id}',[PostController::class,'editPost']);
 Route::post('admin/post-update/{id}',[PostController::class,'update']);
+Route::get('admin/post-delete/{id}',[PostController::class,'delete']);

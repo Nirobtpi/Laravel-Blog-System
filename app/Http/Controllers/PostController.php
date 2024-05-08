@@ -99,6 +99,9 @@ class PostController extends Controller
                 'description'=>$request->description,
                 'status'=>$request->status,
         ]);
+        $post->tags()->sync($request->tags);
+        $post->tags()->detach($request->tags);
+
         foreach($request->tags as $tag){
             $post->tags()->attach($tag);
         };
@@ -106,6 +109,14 @@ class PostController extends Controller
         $request->session()->flash('success_alert','Post Updated Successfully');
         return redirect('admin/index');
 
+    }
+
+    function delete($id){
+        $post=Post::findOrFail($id);
+        // $post->tags()->detach() force delete korar jorno;
+        // $post->forceDelete();
+        $post->delete();
+        return back()->with('error','Post delete successfully');
     }
       
 }

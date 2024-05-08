@@ -17,7 +17,7 @@
         </div>
         @endif
         @if (session('error'))
-        <div class="alert alert-danger">
+        <div class="alert alert-danger text-center" style="width:100%">
             {{ session('error') }}
         </div>
         @endif
@@ -58,7 +58,7 @@
                         <a href="{{ url('/admin/post-edit') }}/{{ $post->id }}">
                             <i class="mdi mdi-open-in-new"></i>
                         </a>
-                        <a href="#">
+                        <a href="{{ url('admin/post-delete') }}/{{ $post->id }}">
                             <i class="mdi mdi-close text-danger"></i>
                         </a>
 
