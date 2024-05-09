@@ -76,21 +76,6 @@
                         </div>
                         <div class="form-group" data-select2-id="8">
                             <label for="tag">Tags</label>
-                            {{-- <select class="form-control @error('tags') is in-valid
-                                
-                            @enderror" name="tags[]" multiple="multiple" id="tag">
-                            
-                                @foreach ($tags as $tag)
-                                @foreach ($post->tags as $postTag)
-                                <option @selected($postTag->id == $tag->id) value="{{ $tag->id }}">
-                            {{ $tag->name }}</option>
-                            @endforeach
-                            @php
-                            continue;
-                            @endphp
-                            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                            @endforeach
-                            </select> --}}
                             <select class="form-control @error('tags') is-invalid @enderror" name="tags[]"
                                 multiple="multiple" id="tag">
                                 @foreach ($tags as $tag)

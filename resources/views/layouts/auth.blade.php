@@ -73,7 +73,7 @@
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#email" aria-expanded="false" aria-controls="email">
-                                <i class="mdi mdi-email"></i>
+                                <i class="fas fa-list-alt"></i>
                                 <span class="nav-text">Category</span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="email" data-parent="#sidebar-menu">
@@ -96,7 +96,7 @@
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#tag" aria-expanded="false" aria-controls="email">
-                                <i class="mdi mdi-email"></i>
+                                <i class="fas fa-tags"></i>
                                 <span class="nav-text">Tag</span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="tag" data-parent="#sidebar-menu">
@@ -119,7 +119,7 @@
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#post" aria-expanded="false" aria-controls="email">
-                                <i class="mdi mdi-email"></i>
+                                <i class="fas fa-blog"></i>
                                 <span class="nav-text">Post</span> <b class="caret"></b>
                             </a>
                             <ul class="collapse" id="post" data-parent="#sidebar-menu">
