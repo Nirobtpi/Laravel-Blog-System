@@ -20,7 +20,7 @@
     <!-- PLUGINS CSS STYLE -->
     <link href="{{ asset('assets/auth/plugins/nprogress/nprogress.css') }}" rel="stylesheet" />
 
-
+    
 
 
     <link href="{{ asset('assets/auth/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css') }}"
@@ -43,6 +43,8 @@
     <!-- FAVICON -->
     <link href="{{ asset('assets/auth/images/favicon.png') }}" rel="shortcut icon" />
     <script src="{{ asset('assets/auth/plugins/nprogress/nprogress.js') }}"></script>
+
+    @stack('style')
 
 </head>
 
@@ -337,6 +339,8 @@
     <script src="{{ asset('assets/auth/js/map.js') }}"></script>
     <script src="{{ asset('assets/auth/js/custom.js') }}"></script>
 
+    @stack('script')
+
     <script>
         $(document).ready(function() {
             $('#logout-button').click(function() {
@@ -344,6 +348,7 @@
             })
         })
     </script>
+
 
 
     <!--  -->

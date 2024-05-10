@@ -9,6 +9,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -21,6 +22,7 @@ class PostController extends Controller
     }
 
     function store(Request $request){
+    //  return  $request->photo;
 
         $request->validate([
             'title'=>['required','string','max:255'],
@@ -36,16 +38,22 @@ class PostController extends Controller
             'category_id.required'=>"Category Is Required",
             'tags.required'=>"Tags Is Required",
         ]);
+         
 
       try{
         DB::beginTransaction();
+           $photo=$request->photo;
+
+            if($request->file('photo')){
+                $photo=Storage::putFile('photo',$request->file('photo'));
+            }
             $post=  Post::create([
                 'user_id'=> auth()->id(),
                 'category_id'=>$request->category_id,
                 'title'=>$request->title,
                 'description'=>$request->description,
                 'status'=>$request->status,
-        
+                'photo'=>$photo,
             ]);
 
                 foreach($request->tags as $tag){
@@ -77,34 +85,65 @@ class PostController extends Controller
     }
 
     function update(Request $request, $id){
+            $photo=$request->photo;
+            // if($request->file('photo')){
+            //     $photo=Storage::putFile('photo',$request->file('photo'));
+            // }
+
+            // if($request->file('photo')){
+            //     // $photo=Storage::putFile('photo',$request->file('photo'));
+            //     $imageName=Post::findOrFail($id);
+            //     $imagePath=public_path('storage/'. $imageName->photo);
+            //     // return $imagePath;
+            //     if(file_exists($request->file('photo'))){
+            //         unlink($imagePath);
+            //        $photo=Storage::putFile('photo',$request->file('photo'));
+            //     }
+            // }
 
         $request->validate([
-            'title'=>['required','string','max:255'],
-            'description'=>['required'],
-            'status'=>['required'],
-            'category_id'=>['required'],
-            'tags'=>['required','array'],
-            'tags.*'=>['required','string'],
-        ],[
-            'title.required'=>"Title Is Required",
-            'description.required'=>"Description Is Required",
-            'status.required'=>"Publish Is Required",
-            'category_id.required'=>"Category Is Required",
-            'tags.required'=>"Tags Is Required",
-        ]);
-        $post=Post::findOrFail($id);
-        $post->update([
-                'category_id'=>$request->category_id,
-                'title'=>$request->title,
-                'description'=>$request->description,
-                'status'=>$request->status,
-        ]);
-        $post->tags()->sync($request->tags);
-        $post->tags()->detach($request->tags);
+                    'title'=>['required','string','max:255'],
+                    'description'=>['required'],
+                    'status'=>['required'],
+                    'category_id'=>['required'],
+                    'tags'=>['required','array'],
+                    'tags.*'=>['required','string'],
+            ],[
+                    'title.required'=>"Title Is Required",
+                    'description.required'=>"Description Is Required",
+                    'status.required'=>"Publish Is Required",
+                    'category_id.required'=>"Category Is Required",
+                    'tags.required'=>"Tags Is Required",
+            ]);
+            $post=Post::findOrFail($id);
 
-        foreach($request->tags as $tag){
-            $post->tags()->attach($tag);
-        };
+        if($request->hasFile('photo')){
+            // Delete old photo if it exists
+            if($post->photo){
+                Storage::delete('photo/' . $post->photo);
+            }
+            // Store new photo
+            $photo = $request->file('photo')->store('photo');
+            $post->photo = $photo;
+        }else{
+            $photo=$post->photo;
+        }
+
+
+            $post->update([
+                    'category_id'=>$request->category_id,
+                    'title'=>$request->title,
+                    'description'=>$request->description,
+                    'status'=>$request->status,
+                    'photo'=>$photo,
+            ]);
+            $post->tags()->sync($request->tags);
+            $post->tags()->detach($request->tags);
+
+            foreach($request->tags as $tag){
+                $post->tags()->attach($tag);
+            };
+
 
         $request->session()->flash('success_alert','Post Updated Successfully');
         return redirect('admin/index');

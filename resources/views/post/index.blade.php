@@ -33,6 +33,7 @@
                     <th scope="col">Status</th>
                     <th scope="col">User</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Thumbnail</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
@@ -40,8 +41,8 @@
                 @forelse ($posts as $key=>$post)
                 <tr>
                     <td scope="row">{{ $posts->firstItem() + $key }}</td>
-                    <td>{{ $post->title }}</td>
-                    <td>{{ Str::limit($post->description, 30) }}</td>
+                    <td>{{ Str::limit($post->title, 10, '...') }}</td>
+                    <td>{{ Str::limit($post->description, 20) }}</td>
                     <td>
                         @if ($post->status == 1)
                         {{ 'Publish' }}
@@ -51,6 +52,12 @@
                     </td>
                     <td>{{ $post->user->name }}</td>
                     <td>{{ $post->category->name }}</td>
+                    @if ($post->photo)
+                         <td><img src="{{ asset('storage/'.$post->photo) }}" style="width: 80px; height:50px" alt=""></td>
+                    @else
+                        <td>{{ 'Null' }}</td>
+                    @endif
+                   
                     <th class="text-center">
                         <a href="#">
                             <i class="fas fa-eye text-info"></i>

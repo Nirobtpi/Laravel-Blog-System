@@ -27,7 +27,7 @@
                         {{ session('error') }}
                     </div>
                     @endif
-                    <form action="{{ url('admin/post-update') }}/{{ $post->id }}" method="post">
+                    <form action="{{ url('admin/post-update') }}/{{ $post->id }}" method="post" enctype="multipart/form-data">
                         @csrf
                         {{-- @method('PATCH') --}}
                         <div class="form-group">
@@ -40,9 +40,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="description">Post Title</label>
+                            <label for="summernote">Post Content</label>
                             <textarea class="form-control rounded-0 bg-light @error('title') is in-valid @enderror"
-                                name="description" id="description">{{ $post->description }}</textarea>
+                                name="description" id="summernote">{!! $post->description !!}</textarea>
                             @error('description')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -76,7 +76,7 @@
                         </div>
                         <div class="form-group" data-select2-id="8">
                             <label for="tag">Tags</label>
-                            <select class="form-control @error('tags') is-invalid @enderror" name="tags[]"
+                            <select class="form-control nirob" name="tags[]"
                                 multiple="multiple" id="tag">
                                 @foreach ($tags as $tag)
                                 @php
@@ -92,11 +92,13 @@
                                 </option>
                                 @endforeach
                             </select>
-
-
                             @error('tags')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="photo">Post Thumbnail</label>
+                           <input type="file" class="form-control rounded-0 bg-light" name="photo" id="photo">
                         </div>
 
                         <div class="form-footer">
@@ -110,5 +112,22 @@
         </div>
     </div>
 </div>
+
+
+@push('style')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+@endpush
+@push('script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+<script>
+        $(document).ready(function() {
+            $('.nirob').select2();
+            $('#summernote').summernote();
+        });
+</script>
+@endpush
 
 @endsection
