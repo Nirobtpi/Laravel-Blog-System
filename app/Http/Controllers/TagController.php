@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Tag;
 
@@ -46,6 +47,8 @@ class TagController extends Controller
     }
     function delete_tag($id){
         Tag::findOrFail($id)->delete();
+        // $tag=Post::findOrFail($id);
+        //  $tag->tags()->detach() ;
          return back()->with('success','Tag Deleted Successfully');
     }
 }

@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 @section('content')
+
+
     <!-- Top Statistics -->
     <div class="content-wrapper">
         <div class="content">
