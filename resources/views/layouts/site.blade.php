@@ -4,7 +4,7 @@
 
   <!-- ** Basic Page Needs ** -->
   <meta charset="utf-8">
-  <title>Megakit | HTML5 Agency Template</title>
+  <title>Blog | @yield('title')</title>
 
   <!-- ** Mobile Specific Metas ** -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -131,7 +131,7 @@
       <div class="col-lg-3 col-sm-6">
         <div class="widget">
           <div class="logo mb-4">
-            <h3>Mega<span>kit.</span></h3>
+            <h3>Blog<span>kit.</span></h3>
           </div>
           <h6><a href="mailto:support@gmail.com">Support@megakit.com</a></h6>
           <a href="tel:+23-345-67890"><span class="text-color h4">+23-456-6588</span></a>
@@ -143,8 +143,8 @@
       <div class="row">
         <div class="col-lg-6">
           <div class="copyright">
-            Copyright &copy; 2020, Designed &amp; Developed by <a href="https://themefisher.com/"
-              >Themefisher</a>
+            Copyright &copy; {{ date('Y') }}, Designed &amp; Developed by <a href="https://themefisher.com/"
+              >Nirob</a>
           </div>
         </div>
         <div class="col-lg-6 text-left text-lg-right">

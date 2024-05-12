@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\DashBoardController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use Illuminate\View\Compilers\ComponentTagCompiler;
@@ -11,9 +13,11 @@ use Illuminate\View\Compilers\ComponentTagCompiler;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
+Route::get('/',[BlogController::class,'index']);
+Route::get('/blog/{id}',[BlogController::class,'singleBlog']);
 
 Auth::routes([
     // 'register'=>false,
