@@ -15,9 +15,16 @@ class BlogController extends Controller
         return view('index',compact('posts'))->with('category');
     }
     function singleBlog($id){
-       $post= post::findOrFail($id);
-       $posts= post::get()->take(3);
+       $post= post::with('tags')->findOrFail($id);
+       $posts= Post::get()->take(3);
        $tags= Tag::get();
         return view('singleblog',compact('post','posts','tags'))->with('category','user');
     }
+
+    function tagLink($id){
+     $mytag=Tag::findOrFail($id);
+    $postsWithTag = Post::whereHas('tags', function ($query) use ($id) {$query->where('id', $id);})->get();
+
+    return view('tag', compact('postsWithTag','mytag'));
+}
 }

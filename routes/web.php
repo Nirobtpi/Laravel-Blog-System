@@ -18,6 +18,7 @@ use Illuminate\View\Compilers\ComponentTagCompiler;
 // });
 Route::get('/',[BlogController::class,'index']);
 Route::get('/blog/{id}',[BlogController::class,'singleBlog']);
+Route::get('/tag/{id}',[BlogController::class,'tagLink']);
 
 Auth::routes([
     // 'register'=>false,

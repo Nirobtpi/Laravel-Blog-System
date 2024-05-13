@@ -25,6 +25,7 @@
     <section class="section blog-wrap bg-gray">
         <div class="container">
             <div class="row">
+                @if (count($posts) >0)
                 @foreach ($posts as $post)
                     <div class="col-lg-6 col-md-6 mb-5">
                         <div class="blog-item">
@@ -50,6 +51,13 @@
                         </div>
                     </div>
                 @endforeach
+
+                @else
+                <div class="alert text-center alert-danger" style="width: 100%">
+                        <h3>No Post Found</h3>
+                    </div>
+
+                @endif
 
 
             </div>
