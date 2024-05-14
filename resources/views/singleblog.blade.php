@@ -50,9 +50,10 @@
                                     <ul class="list-inline">
                                         <li>Tags:</li>
                                         @foreach ($post->tags as $tag)
-										<li class="list-inline-item"><a href="{{ url('/tag') }}/{{ $tag->id }}" rel="tag">{{ $tag->name }}</a></li>
+                                        <li class="list-inline-item"><a href="{{ url('/tag') }}/{{ $tag->id }}"
+                                                rel="tag">{{ $tag->name }}</a></li>
                                         @endforeach
-                                        
+
                                     </ul>
 
                                     <ul class="list-inline">
@@ -71,7 +72,17 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-12">
+                        <form class="contact-form bg-white rounded p-5" method="post" action="{{ url('/post/comment',$post->id) }}" id="comment-form">
+                            @csrf
+                            <h4 class="mb-4">Write a comment</h4>
+                            <textarea class="form-control mb-3" name="comment" id="comment" cols="30" rows="5"
+                                placeholder="Comment"></textarea>
 
+                            <input class="btn btn-main btn-round-full" type="submit" name="submit-contact"
+                                id="submit_contact" value="Submit Message">
+                        </form>
+                    </div>
 
                     <div class="col-lg-12 mb-5">
                         <div class="comment-area card border-0 p-5">
@@ -95,60 +106,18 @@
                                                 staffing company, a
                                                 company that provides consultants on an agency basis. </p>
                                         </div>
+                                        <form class="contact-form bg-white rounded p-5" id="comment-form">
+                                            <h4 class="mb-4">Riply</h4>
+                                            <textarea class="form-control mb-3" name="comment_reply" id="comment"
+                                                cols="30" rows="5" placeholder="Comment"></textarea>
+
+                                            <input class="btn btn-main btn-round-full" type="submit"
+                                                name="submit-contact" id="submit_contact" value="Submit Message">
+                                        </form>
                                     </div>
                                 </li>
-
-                                <li>
-                                    <div class="comment-area-box">
-                                        <img loading="lazy" alt="comment-author" src="images/blog/test2.jpg"
-                                            class="mt-2 img-fluid float-left mr-3">
-
-                                        <h5 class="mb-1">Philip W</h5>
-                                        <span>United Kingdom</span>
-
-                                        <div class="comment-meta mt-4 mt-lg-0 mt-md-0 float-lg-right float-md-right">
-                                            <a href="#"><i class="icofont-reply mr-2 text-muted"></i>Reply |</a>
-                                            <span class="date-comm">Posted October 7, 2018</span>
-                                        </div>
-
-                                        <div class="comment-content mt-3">
-                                            <p>Some consultants are employed indirectly by the client via a consultancy
-                                                staffing company, a
-                                                company that provides consultants on an agency basis. </p>
-                                        </div>
-                                    </div>
-                                </li>
-
-
                             </ul>
                         </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <form class="contact-form bg-white rounded p-5" id="comment-form">
-                            <h4 class="mb-4">Write a comment</h4>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="name" id="name"
-                                            placeholder="Name:">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="mail" id="mail"
-                                            placeholder="Email:">
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <textarea class="form-control mb-3" name="comment" id="comment" cols="30" rows="5"
-                                placeholder="Comment"></textarea>
-
-                            <input class="btn btn-main btn-round-full" type="submit" name="submit-contact"
-                                id="submit_contact" value="Submit Message">
-                        </form>
                     </div>
                 </div>
             </div>

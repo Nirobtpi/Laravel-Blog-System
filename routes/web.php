@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\DashBoardController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
@@ -19,6 +21,7 @@ use Illuminate\View\Compilers\ComponentTagCompiler;
 Route::get('/',[BlogController::class,'index']);
 Route::get('/blog/{id}',[BlogController::class,'singleBlog']);
 Route::get('/tag/{id}',[BlogController::class,'tagLink']);
+
 
 Auth::routes([
     // 'register'=>false,
@@ -54,4 +57,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('admin/post-update/{id}',[PostController::class,'update']);
     Route::get('admin/post-delete/{id}',[PostController::class,'delete']);
 });
+
+
+Route::post('/post/comment/{id}',[CommentController::class,'Add_comment']);
 
