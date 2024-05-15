@@ -59,5 +59,7 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 
-Route::post('/post/comment/{id}',[CommentController::class,'Add_comment']);
+Route::post('/post/comment/{id}',[CommentController::class,'Add_comment'])->middleware('auth');
+Route::get('/comment/delete/{id}',[CommentController::class,'commentDelete'])->middleware('auth');
+
 

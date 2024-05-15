@@ -18,6 +18,7 @@ class PostController extends Controller
     function add_post(){
         $categories=Category::get();
         $tags=Tag::get();
+        
 
         return view('post.create-post',compact('categories','tags'));
 
