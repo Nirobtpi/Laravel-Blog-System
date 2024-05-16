@@ -186,6 +186,8 @@ Essential Scripts
 
 <script src="{{ asset('assets/site/js/script.js') }}"></script>
 
+@stack('script')
+
 </body>
 
 </html>

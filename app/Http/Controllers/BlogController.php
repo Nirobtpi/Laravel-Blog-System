@@ -27,7 +27,9 @@ class BlogController extends Controller
 
     function tagLink($id){
         $mytag=Tag::findOrFail($id);
-        $postsWithTag = Post::whereHas('tags', function ($query) use ($id) {$query->where('id', $id);})->get();
+        $postsWithTag = Post::whereHas('tags', function ($query) use ($id) 
+        {$query->where('id', $id);}
+        )->get();
 
         return view('tag', compact('postsWithTag','mytag'));
     }

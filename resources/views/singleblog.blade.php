@@ -98,35 +98,45 @@
                                 <h4 class="mb-4">{{ $count }} Comments</h4>
                                 <ul class="comment-tree list-unstyled">
                                     <li class="mb-5">
-                                        @if(count($comments) > 0)
+                                        @if (count($comments) > 0)
                                             @foreach ($comments as $comment)
                                                 <div class="comment-area-box">
-                                            <img loading="lazy" alt="comment-author" src="{{ asset('assets/site/images/blog/test1.jpg') }}"
-                                                class="img-fluid float-left mr-3 mt-2">
+                                                    <img loading="lazy" alt="comment-author"
+                                                        src="{{ asset('assets/site/images/blog/test1.jpg') }}"
+                                                        class="img-fluid float-left mr-3 mt-2">
 
-                                            <h5 class="mb-1">{{ $comment->user->name }}</h5>
-                                            <span>United Kingdom</span>
+                                                    <h5 class="mb-1">{{ $comment->user->name }}</h5>
+                                                    <span>United Kingdom</span>
 
-                                            <div class="comment-meta mt-4 mt-lg-0 mt-md-0 float-lg-right float-md-right">
-                                                <a href="{{ url('/comment/delete') }}/{{ $comment->id }}"><i class="icofont-reply mr-2 text-muted"></i>Delete |</a>
-                                                <span class="date-comm">Posted {{ date('M d, Y', strtotime($comment->created_at)) }}</span>
-                                            </div>
+                                                    <div
+                                                        class="comment-meta mt-4 mt-lg-0 mt-md-0 float-lg-right float-md-right">
+                                                        <a href="{{ url('/comment/delete') }}/{{ $comment->id }}"><i
+                                                                class="icofont-reply mr-2 text-muted"></i>Delete |</a>
+                                                        <span class="date-comm">Posted
+                                                            {{ date('M d, Y', strtotime($comment->created_at)) }}</span>
+                                                    </div>
 
-                                            <div class="comment-content mt-3">
-                                                <p>{{ $comment->comment }} </p>
-                                            </div>
-                                            <form class="contact-form bg-white rounded" id="comment-form">
-                                                <h4 class="mb-4">Reply</h4>
-                                                <textarea class="form-control mb-3" name="comment_reply" id="comment" cols="30" rows="5"
-                                                    placeholder="Comment"></textarea>
+                                                    <div class="comment-content mt-3">
+                                                        <p>{{ $comment->comment }} </p>
+                                                    </div>
+                                                    <a href="javascript:void(0)"  class='reply_comment'>Reply</a>
 
-                                                <input class="btn btn-main btn-round-full" type="submit"
-                                                    name="submit-contact" id="submit_contact" value="Submit Message">
-                                            </form>
-                                        </div>
+                                                   <div class='reply_form'>
+                                                        <form class="contact-form bg-white rounded mt-3"
+                                                            >
+                                                            <h4 class="mb-4">Reply</h4>
+                                                            <textarea class="form-control mb-3" name="comment_reply" id="comment" cols="30" rows="5"
+                                                                placeholder="Comment"></textarea>
+
+                                                            <input class="btn btn-main btn-round-full" type="submit"
+                                                                name="submit-contact" id="submit_contact"
+                                                                value="Submit Message">
+                                                        </form>
+                                                   </div>
+                                                </div>
                                             @endforeach
                                         @else
-                                        <h3>{{ "No Comment Found" }}</h3>
+                                            <h3>{{ 'No Comment Found' }}</h3>
                                         @endif
                                     </li>
                                 </ul>
@@ -200,3 +210,15 @@
         </div>
     </section>
 @endsection
+
+@push('script')
+    <script>
+         $('.reply_form').hide();
+        $(document).ready(function() {
+           
+            $('.reply_comment').click(function() {
+                $(this).siblings('.reply_form').show();
+            });
+        });
+    </script>
+@endpush
