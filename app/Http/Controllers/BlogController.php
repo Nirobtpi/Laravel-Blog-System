@@ -12,7 +12,7 @@ use App\Models\Comment;
 class BlogController extends Controller
 {
     function index(){
-        $posts= Post::get();
+        $posts= Post::simplePaginate(3);
         
         return view('index',compact('posts'))->with('category');
     }
