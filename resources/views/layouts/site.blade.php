@@ -29,26 +29,29 @@
   <!--Favicon-->
   <link rel="icon" href="{{ asset('assets/site/images/favicon.png') }}" type="image/x-icon">
 
+  @stack('style')
+
 </head>
 
 <body>
 
 <!-- Header Start -->
 <header class="navigation">
-  <div class="header-top ">
+  <div class="header-top">
     <div class="container">
       <div class="row justify-content-between align-items-center">
-        <div class="col-lg-2 col-md-4">
-          <div class="header-top-socials text-center text-lg-left text-md-left">
-            <a href="https://www.facebook.com/themefisher" aria-label="facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://twitter.com/themefisher" aria-label="twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://github.com/themefisher/" aria-label="github"><i class="fab fa-github"></i></a>
+        <div class="col-lg-6 col-md-6">
+          <div class="header-top-info mb-2 mb-md-0 text-center text-md-left">
+            <span class="text-white-50">Stories that inform and inspire</span>
           </div>
         </div>
-        <div class="col-lg-10 col-md-8 text-center text-lg-right text-md-right">
-          <div class="header-top-info mb-2 mb-md-0">
-            <a href="tel:+23-345-67890">Call Us : <span>+23-345-67890</span></a>
-            <a href="mailto:support@gmail.com"><i class="fas fa-envelope mr-2"></i><span>support@gmail.com</span></a>
+        <div class="col-lg-6 col-md-6 text-center text-md-right">
+          <div class="header-top-info mb-0">
+            @auth
+              <a href="{{ url('/dashboard') }}"><i class="fas fa-user mr-2"></i><span>{{ Auth::user()->name }}</span></a>
+            @else
+              <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt mr-2"></i><span>Login</span></a>
+            @endauth
           </div>
         </div>
       </div>
@@ -71,12 +74,26 @@
       
             <div class="collapse navbar-collapse text-center" id="navbarsExample09">
               <ul class="navbar-nav ml-auto">
-                <li class="nav-item @@home">
+                <li class="nav-item">
                   <a class="nav-link" href="{{ url('/') }}">Home</a>
                 </li>
-                
-                <li class="nav-item @@contact"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                <li class="nav-item @@register"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                @auth
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('site-logout-form').submit();">
+                      Logout
+                    </a>
+                    <form id="site-logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                    </form>
+                  </li>
+                @else
+                  <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                @endauth
               </ul>
             </div>
           </nav>
@@ -92,67 +109,49 @@
 <footer class="footer section">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="widget">
-          <h4 class="text-capitalize mb-4">Company</h4>
-
-          <ul class="list-unstyled footer-menu lh-35">
-            <li><a href="about.html">Terms & Conditions</a></li>
-            <li><a href="about.html">Privacy Policy</a></li>
-            <li><a href="cobtact.html">Support</a></li>
-            <li><a href="cobtact.html">FAQ</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-6 col-sm-6">
-        <div class="widget">
-          <h4 class="text-capitalize mb-4">Quick Links</h4>
-
-          <ul class="list-unstyled footer-menu lh-35">
-            <li><a href="about.html">About</a></li>
-            <li><a href="service.html">Services</a></li>
-            <li><a href="blog-grid.html">Blogs</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 mx-auto">
-        <div class="widget">
-          <h4 class="text-capitalize mb-4">Subscribe Us</h4>
-          <p>Subscribe to get latest news article and resources </p>
-
-          <form action="#" class="sub-form">
-            <input type="text" class="form-control mb-3" placeholder="Subscribe Now ...">
-            <a href="#" class="btn btn-main btn-small">subscribe</a>
-          </form>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-sm-6">
+      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
         <div class="widget">
           <div class="logo mb-4">
             <h3>Blog<span>kit.</span></h3>
           </div>
-          <h6><a href="mailto:support@gmail.com">Support@megakit.com</a></h6>
-          <a href="tel:+23-345-67890"><span class="text-color h4">+23-456-6588</span></a>
+          <p class="mb-3">Fresh stories, ideas and useful insights for curious readers.</p>
+          <h6><a href="mailto:support@gmail.com">support@gmail.com</a></h6>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+        <div class="widget">
+          <h4 class="text-capitalize mb-4">Quick Links</h4>
+          <ul class="list-unstyled footer-menu lh-35">
+            <li><a href="{{ url('/') }}">Home</a></li>
+            <li><a href="{{ url('/') }}">All Blogs</a></li>
+            @auth
+              <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+            @else
+              <li><a href="{{ route('login') }}">Login</a></li>
+              <li><a href="{{ route('register') }}">Register</a></li>
+            @endauth
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12">
+        <div class="widget">
+          <h4 class="text-capitalize mb-4">Stay connected</h4>
+          <p>Follow us for the latest articles and updates.</p>
+          <ul class="list-inline footer-socials mt-3">
+            <li class="list-inline-item"><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="list-inline-item"><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="#" aria-label="Github"><i class="fab fa-github"></i></a></li>
+          </ul>
         </div>
       </div>
     </div>
 
     <div class="footer-btm pt-4">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-12 text-center">
           <div class="copyright">
-            Copyright &copy; {{ date('Y') }}, Designed &amp; Developed by <a href="https://themefisher.com/"
-              >Nirob</a>
+            Copyright &copy; {{ date('Y') }} Blogkit. Built by Nirob.
           </div>
-        </div>
-        <div class="col-lg-6 text-left text-lg-right">
-          <ul class="list-inline footer-socials">
-            <li class="list-inline-item"><a href="https://www.facebook.com/themefisher"><i class="fab fa-facebook-f mr-2"></i>Facebook</a></li>
-            <li class="list-inline-item"><a href="https://twitter.com/themefisher"><i class="fab fa-twitter mr-2"></i>Twitter</a></li>
-            <li class="list-inline-item"><a href="https://www.pinterest.com/themefisher/"><i class="fab fa-pinterest-p mr-2 "></i>Pinterest</a></li>
-          </ul>
         </div>
       </div>
     </div>

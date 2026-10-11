@@ -1,35 +1,56 @@
 @extends('layouts.auth')
 
-@section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-8 offset-2">
-                <div class="card card-default p-3">
-                    <div class="card-body">
-                        @if(session('success'))
-                            <div class="alert alert-success">
-                                 {{ session('success') }}
-                            </div>
-                        @endif
-                        <form action="{{ url('/edit-tag') }}/{{ $tag->id }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <label for="tag">Tag Name</label>
-                                <input type="text" name="name" value="{{ $tag->name }}" class="form-control rounded-0 bg-light @error('name') is in-valid
-                                    
-                                @enderror"
-                                    id="tag" placeholder="Enter Tag Name">
-                                @error('name')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="form-footer">
-                                <button type="submit" name="submit" class="btn btn-secondary btn-pill">Update</button>
-                            </div>
-                        </form>
+@section('title', 'Edit Tag')
 
+@section('content')
+    <div class="container-fluid px-3 px-md-4">
+        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+            <div>
+                <h2 class="mb-1">Edit Tag</h2>
+                <p class="text-muted mb-0">Update the label used to group related posts.</p>
+            </div>
+            <a href="{{ url('view-tag') }}" class="btn btn-light border mt-3 mt-md-0">
+                <i class="fas fa-list mr-1"></i> View tags
+            </a>
+        </div>
+
+        @if (session('success'))
+            <div class="alert alert-success"><i class="fas fa-check-circle mr-1"></i>{{ session('success') }}</div>
+        @endif
+
+        <div class="card card-default category-form-card">
+            <div class="card-header bg-white border-bottom">
+                <h4 class="mb-1">Tag details</h4>
+                <small class="text-muted">Use a simple word or phrase that describes your content.</small>
+            </div>
+            <div class="card-body p-3 p-md-4">
+                <form action="{{ url('/edit-tag', $tag->id) }}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="tag">Tag name <span class="text-danger">*</span></label>
+                        <input type="text" name="name" id="tag"
+                            value="{{ old('name', $tag->name) }}"
+                            class="form-control @error('name') is-invalid @enderror"
+                            placeholder="e.g. Laravel" maxlength="255" required autofocus>
+                        <small class="form-text text-muted">Keep tags short and relevant.</small>
+                        @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
-                </div>
+                    <div class="border-top pt-3 mt-4 d-flex justify-content-end">
+                        <a href="{{ url('view-tag') }}" class="btn btn-light border mr-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save mr-1"></i> Save changes
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
+
+@push('style')
+    <style>
+        .category-form-card { max-width: 760px; margin: 0 auto; border-radius: 10px; }
+        .category-form-card label { font-weight: 700; }
+        .category-form-card .form-control { min-height: 44px; border-radius: 5px; }
+    </style>
+@endpush

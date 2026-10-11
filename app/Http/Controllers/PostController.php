@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-// use File;
 
 class PostController extends Controller
 {
@@ -32,6 +31,7 @@ class PostController extends Controller
             'description'=>['required'],
             'status'=>['required'],
             'category_id'=>['required'],
+            'photo'=>['nullable','image','max:5120'],
             'tags'=>['required','array'],
             'tags.*'=>['required','string'],
         ],[
@@ -45,10 +45,15 @@ class PostController extends Controller
 
       try{
         DB::beginTransaction();
-           $photo=$request->photo;
+            $photo = null;
 
-            if($request->file('photo')){
-                $photo=Storage::putFile('photo',$request->file('photo'));
+            if($request->hasFile('photo')){
+                $directory = public_path('upload/image');
+                File::ensureDirectoryExists($directory);
+
+                $filename = $request->file('photo')->hashName();
+                $request->file('photo')->move($directory, $filename);
+                $photo = 'upload/image/' . $filename;
             }
             $post=  Post::create([
                 'user_id'=> auth()->id(),
@@ -76,7 +81,7 @@ class PostController extends Controller
 
     }
     function index(){
-        $posts=Post::where('user_id', '=', Auth::user()->id)->with('category','user')->simplePaginate(3);
+        $posts=Post::where('user_id', '=', Auth::user()->id)->with('category','user')->paginate(10);
         return view('post.index',compact('posts'));
     }
 
@@ -88,13 +93,12 @@ class PostController extends Controller
     }
 
     function update(Request $request, $id){
-        $photo=$request->photo;
-
         $request->validate([
                     'title'=>['required','string','max:255'],
                     'description'=>['required'],
                     'status'=>['required'],
                     'category_id'=>['required'],
+                    'photo'=>['nullable','image','max:5120'],
                     'tags'=>['required','array'],
                     'tags.*'=>['required','string'],
             ],[
@@ -108,16 +112,17 @@ class PostController extends Controller
            
 
         if($request->hasFile('photo')){
-            if($post->photo != ''){
-                unlink(public_path("storage/".$post->photo));
-            }
-            
             if($post->photo){
-                Storage::delete('photo/' . $post->photo);
+                File::delete(public_path($post->photo));
+                Storage::disk('public')->delete($post->photo);
             }
-            // Store new photo
-            $photo = $request->file('photo')->store('photo');
-            $post->photo = $photo;
+
+            $directory = public_path('upload/image');
+            File::ensureDirectoryExists($directory);
+
+            $filename = $request->file('photo')->hashName();
+            $request->file('photo')->move($directory, $filename);
+            $photo = 'upload/image/' . $filename;
         }else{
             $photo=$post->photo;
         }

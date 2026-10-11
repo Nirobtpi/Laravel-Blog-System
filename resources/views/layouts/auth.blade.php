@@ -64,14 +64,20 @@
                 <!-- Aplication Brand -->
                 <div class="app-brand">
                     <a href="{{ url('dashboard') }}">
-                        <img src="{{ asset('assets/auth/images/logo.png') }}" alt="Mono">
-                        <span class="brand-name">MONO</span>
+                        <img src="{{ asset('assets/auth/images/logo.png') }}" alt="Blogkit">
+                        <span class="brand-name">Blogkit</span>
                     </a>
                 </div>
                 <!-- begin sidebar scrollbar -->
                 <div class="sidebar-left" style="overflow-y: scroll;" data-simplebar>
                     <!-- sidebar menu -->
                     <ul class="nav sidebar-inner" id="sidebar-menu">
+                        <li>
+                            <a class="sidenav-item-link" href="{{ url('dashboard') }}">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span class="nav-text">Dashboard</span>
+                            </a>
+                        </li>
                         <li class="has-sub">
                             <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
                                 data-target="#email" aria-expanded="false" aria-controls="email">
@@ -148,12 +154,9 @@
                     <div class="sidebar-footer-content">
                         <ul class="d-flex">
                             <li>
-                                <a href="user-account-settings.html" data-toggle="tooltip"
-                                    title="Profile settings"><i class="mdi mdi-settings"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" data-toggle="tooltip" title="No chat messages"><i
-                                        class="mdi mdi-chat-processing"></i></a>
+                                <a href="javascript:void(0)" id="sidebar-logout" data-toggle="tooltip" title="Log out">
+                                    <i class="mdi mdi-logout"></i>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -174,42 +177,10 @@
                         <span class="sr-only">Toggle navigation</span>
                     </button>
 
-                    <span class="page-title">dashboard</span>
+                    <span class="page-title">@yield('title', 'Dashboard')</span>
 
-                    <div class="navbar-right ">
-
-                        <!-- search form -->
-                        <div class="search-form">
-                            <form action="index.html" method="get">
-                                <div class="input-group input-group-sm" id="input-group-search">
-                                    <input type="text" autocomplete="off" name="query" id="search-input"
-                                        class="form-control" placeholder="Search..." />
-                                    <div class="input-group-append">
-                                        <button class="btn" type="button">/</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <ul class="dropdown-menu dropdown-menu-search">
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Morbi leo risus</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Dapibus ac facilisis in</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Porta ac consectetur ac</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Vestibulum at eros</a>
-                                </li>
-
-                            </ul>
-
-                        </div>
-
+                    <div class="navbar-right">
                         <ul class="nav navbar-nav">
-                            <!-- User Account -->
                             <li class="dropdown user-menu">
                                 <button class="dropdown-toggle nav-link" data-toggle="dropdown">
                                     <img src="{{ asset('assets/auth/images/user/user-xs-01.jpg') }}"
@@ -218,40 +189,19 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li>
-                                        <a class="dropdown-link-item" href="user-profile.html">
-                                            <i class="mdi mdi-account-outline"></i>
-                                            <span class="nav-text">My Profile</span>
+                                        <a class="dropdown-link-item" href="{{ url('/') }}" target="_blank">
+                                            <i class="mdi mdi-web"></i>
+                                            <span class="nav-text">View Website</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="dropdown-link-item" href="email-inbox.html">
-                                            <i class="mdi mdi-email-outline"></i>
-                                            <span class="nav-text">Message</span>
-                                            <span class="badge badge-pill badge-primary">24</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-link-item" href="user-activities.html">
-                                            <i class="mdi mdi-diamond-stone"></i>
-                                            <span class="nav-text">Activitise</span></a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-link-item" href="user-account-settings.html">
-                                            <i class="mdi mdi-settings"></i>
-                                            <span class="nav-text">Account Setting</span>
-                                        </a>
-                                    </li>
-
                                     <li class="dropdown-footer">
-                                        {{-- <a class="dropdown-link-item" href="{{ url('/logout') }}"> <i
-                                            class="mdi mdi-logout"></i> Log Out </a> --}}
-                                        <form method="post" id='logout-form' action="{{ route('logout') }}">
+                                        <form method="post" id="logout-form" action="{{ route('logout') }}">
                                             @csrf
                                             <a id="logout-button" class="dropdown-link-item"
                                                 href="javascript:void(0)">
-                                                <i class="mdi mdi-logout"></i> Log Out </a>
+                                                <i class="mdi mdi-logout"></i> Log Out
+                                            </a>
                                         </form>
-
                                     </li>
                                 </ul>
                             </li>
@@ -263,22 +213,16 @@
             <!-- ====================================
         ——— CONTENT WRAPPER
         ===================================== -->
-            <div class="container" style="padding-top: 60px">
+            <div class="content-wrapper" style="padding-top: 40px; padding-bottom: 40px;">
                 @yield('content')
             </div>
 
-            <!-- Footer -->
             <footer class="footer mt-auto">
                 <div class="copyright bg-white">
-                    <p>
-                        &copy; <span id="copy-year"></span> Copyright Mono Dashboard Bootstrap Template by <a
-                            class="text-primary" href="http://www.iamabdus.com/" target="_blank">Abdus</a>.
-                    </p>
+                    <p>&copy; <span id="copy-year"></span> Blogkit Admin. All rights reserved.</p>
                 </div>
                 <script>
-                    var d = new Date();
-                    var year = d.getFullYear();
-                    document.getElementById("copy-year").innerHTML = year;
+                    document.getElementById("copy-year").innerHTML = new Date().getFullYear();
                 </script>
             </footer>
 
@@ -343,10 +287,10 @@
 
     <script>
         $(document).ready(function() {
-            $('#logout-button').click(function() {
+            $('#logout-button, #sidebar-logout').click(function() {
                 $('#logout-form').submit();
-            })
-        })
+            });
+        });
     </script>
 
 
