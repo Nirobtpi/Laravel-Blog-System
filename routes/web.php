@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdController;
 use App\Http\Controllers\Auth\DashBoardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
@@ -56,6 +57,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('admin/post-edit/{id}',[PostController::class,'editPost']);
     Route::post('admin/post-update/{id}',[PostController::class,'update']);
     Route::get('admin/post-delete/{id}',[PostController::class,'delete']);
+
+    // Ads route
+    Route::get('add-ad', [AdController::class, 'index']);
+    Route::post('add-ad', [AdController::class, 'store']);
+    Route::get('view-ads', [AdController::class, 'view']);
+    Route::get('edit-ad/{id}', [AdController::class, 'edit']);
+    Route::post('edit-ad/{id}', [AdController::class, 'update']);
+    Route::get('delete-ad/{id}', [AdController::class, 'delete']);
 });
 
 

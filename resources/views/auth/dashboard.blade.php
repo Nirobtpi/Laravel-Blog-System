@@ -76,19 +76,24 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="col-md-3 mb-3 mb-md-0">
                         <a href="{{ url('admin/add-post') }}" class="btn btn-primary btn-block">
                             <i class="fas fa-plus mr-1"></i> New post
                         </a>
                     </div>
-                    <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="col-md-3 mb-3 mb-md-0">
                         <a href="{{ url('add-category') }}" class="btn btn-outline-primary btn-block">
                             <i class="fas fa-folder-plus mr-1"></i> New category
                         </a>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3 mb-3 mb-md-0">
                         <a href="{{ url('add-tag') }}" class="btn btn-outline-primary btn-block">
                             <i class="fas fa-tag mr-1"></i> New tag
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url('add-ad') }}" class="btn btn-outline-primary btn-block">
+                            <i class="fas fa-ad mr-1"></i> New ad
                         </a>
                     </div>
                 </div>

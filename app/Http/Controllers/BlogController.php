@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ad;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
@@ -22,7 +23,8 @@ class BlogController extends Controller
        $tags= Tag::get();
        $comments=Comment::where('post_id','=', $id)->get();
        $count=Comment::where('post_id','=', $id)->count();
-        return view('singleblog',compact('post','posts','tags','comments','count'))->with('category','user');
+       $ads = Ad::where('status', 1)->latest()->get();
+        return view('singleblog',compact('post','posts','tags','comments','count','ads'))->with('category','user');
     }
 
     function tagLink($id){

@@ -74,6 +74,35 @@
                                             </ul>
                                         </div>
                                     @endif
+
+                                    @if (!empty($ads) && $ads->count() > 0)
+                                        <div class="post-promo-box" style="display:block !important; visibility:visible !important; margin-top:30px; padding-top:24px; border-top:1px solid #e5e5e5;">
+                                            <p style="margin:0 0 16px; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#f75757;">
+                                                Partner
+                                            </p>
+                                            <div class="row">
+                                                @foreach ($ads as $promo)
+                                                    <div class="col-md-6 mb-3">
+                                                        <div class="post-promo-item">
+                                                            @if ($promo->link)
+                                                                <a href="{{ $promo->link }}" target="_blank" rel="noopener"
+                                                                    title="{{ $promo->title }}" style="display:block;">
+                                                                    <img src="{{ asset($promo->image) }}"
+                                                                        alt="{{ $promo->title }}"
+                                                                        class="post-promo-image">
+                                                                </a>
+                                                            @else
+                                                                <img src="{{ asset($promo->image) }}"
+                                                                    alt="{{ $promo->title }}"
+                                                                    class="post-promo-image">
+                                                            @endif
+                                                            <p style="margin:8px 0 0; font-size:14px; color:#555;">{{ $promo->title }}</p>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </article>
                         </div>
@@ -221,6 +250,21 @@
         .single-post-body { color: #555; line-height: 1.8; font-size: 16px; }
         .single-post-body img { max-width: 100%; height: auto; }
         .single-tag-chip { display: inline-block; padding: 4px 12px; border-radius: 20px; background: #f0f2f5; color: #f75757; font-size: 13px; }
+        .post-promo-box { display: block !important; visibility: visible !important; }
+        .post-promo-item { display: block !important; }
+        .post-promo-image {
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 220px;
+            object-fit: cover;
+            background: #f0f2f5;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+        }
+        @media (max-width: 767px) {
+            .post-promo-image { height: 180px; }
+        }
         .comment-avatar, .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: #f75757; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
         .author-avatar { width: 72px; height: 72px; font-size: 28px; }
         .sidebar-thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 4px; display: block; }

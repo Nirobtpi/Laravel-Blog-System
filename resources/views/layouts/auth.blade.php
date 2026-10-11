@@ -147,6 +147,27 @@
                                 </div>
                             </ul>
                         </li>
+                        <li class="has-sub">
+                            <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
+                                data-target="#ads" aria-expanded="false" aria-controls="ads">
+                                <i class="fas fa-ad"></i>
+                                <span class="nav-text">Ads</span> <b class="caret"></b>
+                            </a>
+                            <ul class="collapse" id="ads" data-parent="#sidebar-menu">
+                                <div class="sub-menu">
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{ url('add-ad') }}">
+                                            <span class="nav-text">Add Ad</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{ url('view-ads') }}">
+                                            <span class="nav-text">View Ads</span>
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
 
